@@ -40,6 +40,7 @@ public class MikoLambStateMachine implements MikoLambStateMachineExecute {
         }
         return this;
     }
+
     @Override
     public <T>Object execute(MikoLambStateMachineCurrentStatus statusProcess, String event, T data) {
         if(StringUtils.isBlank(event))                                 throw new MikoLambEventException(ES00000033);
