@@ -1,11 +1,11 @@
 package org.mikolamb.framework.util.sample;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mikolamb.framework.common.exception.EventException;
+import org.mikolamb.framework.common.exception.MikoLambEventException;
 
 import java.util.Map;
 
-import static org.mikolamb.framework.common.enums.ExceptionEnum.*;
+import static org.mikolamb.framework.common.enums.MikoLambExceptionEnum.*;
 
 /**
  * Created by WangGang on 2017/6/22 0022.
@@ -15,24 +15,24 @@ import static org.mikolamb.framework.common.enums.ExceptionEnum.*;
 public class GetUtil {
     public static <T>T get(Map map, String value){
         if(StringUtils.isBlank(value)){
-            throw new EventException(ES00000002);
+            throw new MikoLambEventException(ES00000002);
         }
 
         if(map == null){
-            throw new EventException(ES00000001);
+            throw new MikoLambEventException(ES00000001);
         }
 
         if(map.isEmpty()){
-            throw new EventException(ES00000001);
+            throw new MikoLambEventException(ES00000001);
         }
 
         Object obj = map.get(value);
         if(obj == null){
-            throw new EventException(ES00000003);
+            throw new MikoLambEventException(ES00000003);
         }
         T t = (T)obj ;
         if(t == null){
-            throw new EventException(ES00000003);
+            throw new MikoLambEventException(ES00000003);
         }
 
         return t;

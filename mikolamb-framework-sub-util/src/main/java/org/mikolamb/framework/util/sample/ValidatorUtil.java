@@ -1,13 +1,13 @@
 package org.mikolamb.framework.util.sample;
 
-import org.mikolamb.framework.common.exception.EventException;
+import org.mikolamb.framework.common.exception.MikoLambEventException;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-import static org.mikolamb.framework.common.enums.ExceptionEnum.EI00000000;
+import static org.mikolamb.framework.common.enums.MikoLambExceptionEnum.EI00000000;
 
 /**
  * @description: 校验工具类
@@ -21,7 +21,7 @@ public class ValidatorUtil {
         validator.validate(t);
         Set set = validator.validate(t);
         if(!set.isEmpty()){
-            throw new EventException(EI00000000);
+            throw new MikoLambEventException(EI00000000);
         }
 
     }
@@ -33,7 +33,7 @@ public class ValidatorUtil {
         validator.validate(t);
         Set set = validator.validate(t,clazz);
         if(!set.isEmpty()){
-            throw new EventException(EI00000000);
+            throw new MikoLambEventException(EI00000000);
         }
     }
 

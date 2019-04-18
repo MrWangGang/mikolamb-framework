@@ -1,8 +1,8 @@
 package org.mikolamb.framework.util.algorithm;
 
 
-import org.mikolamb.framework.common.exception.EventException;
-import org.mikolamb.framework.common.enums.AlgorithmEnum;
+import org.mikolamb.framework.common.exception.MikoLambEventException;
+import org.mikolamb.framework.common.enums.MikoLambAlgorithmEnum;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.*;
 import java.security.spec.*;
 
-import static org.mikolamb.framework.common.enums.ExceptionEnum.*;
+import static org.mikolamb.framework.common.enums.MikoLambExceptionEnum.*;
 
 /**
  * Created by WangGang on 2017/6/22 0022.
@@ -40,14 +40,14 @@ public class RSACoderAlgorithm {
      * @param encryptionType 加密算法类型
      * @return  加密结果
      */
-    public static String encrypt(String paramsString, String charset, String publicKey, AlgorithmEnum encryptionType) {
+    public static String encrypt(String paramsString, String charset, String publicKey, MikoLambAlgorithmEnum encryptionType) {
         try {
             byte[] encryptedResult = RSACoderAlgorithm.encryptByPublicKey(paramsString.getBytes(charset),
                     publicKey, encryptionType);
 
             return Base64Algorithm.byteArrayToBase64(encryptedResult);
         } catch (UnsupportedEncodingException e) {
-            throw new EventException(ES00000005);
+            throw new MikoLambEventException(ES00000005);
         }
     }
 
@@ -60,13 +60,13 @@ public class RSACoderAlgorithm {
      * @param privateKey 商户的私钥
      * @return 加签后的数据
      */
-    public static String sign(String data, String charset, String privateKey,AlgorithmEnum signType) {
+    public static String sign(String data, String charset, String privateKey, MikoLambAlgorithmEnum signType) {
         try {
             byte[] dataInBytes = data.getBytes(charset);
             String signParams = RSACoderAlgorithm.sign(dataInBytes, privateKey,signType);//用应用的私钥加签.
             return signParams;
         } catch (UnsupportedEncodingException e) {
-            throw new EventException(ES00000005);
+            throw new MikoLambEventException(ES00000005);
         }
     }
 
@@ -84,7 +84,7 @@ public class RSACoderAlgorithm {
             byte[] encryptedBytes = decryptByPrivateKey(byte64, key, null);
             return new String(encryptedBytes, charset);
         } catch (UnsupportedEncodingException e) {
-            throw new EventException(ES00000005);
+            throw new MikoLambEventException(ES00000005);
         }
 
     }
@@ -98,13 +98,13 @@ public class RSACoderAlgorithm {
      * @param encryptionType 加密类型
      * @return 解密后的明文
      */
-    public static String decrypt(String data, String key, String charset, AlgorithmEnum encryptionType) {
+    public static String decrypt(String data, String key, String charset, MikoLambAlgorithmEnum encryptionType) {
         try {
             byte[] byte64 = Base64Algorithm.base64ToByteArray(data);
             byte[] encryptedBytes = decryptByPrivateKey(byte64, key, encryptionType);
             return new String(encryptedBytes, charset);
         } catch (UnsupportedEncodingException e) {
-            throw new EventException(ES00000005);
+            throw new MikoLambEventException(ES00000005);
         }
     }
 
@@ -115,7 +115,7 @@ public class RSACoderAlgorithm {
      * @param encryptionType 加密类型
      * @return 解密后的byte数组
      */
-    public static byte[] decryptByPrivateKey(byte[] data, String key, AlgorithmEnum encryptionType) {
+    public static byte[] decryptByPrivateKey(byte[] data, String key, MikoLambAlgorithmEnum encryptionType) {
         try {
             byte[] decryptedData = null;
 
@@ -155,19 +155,19 @@ public class RSACoderAlgorithm {
 
             return decryptedData;
         } catch (IOException e) {
-            throw new EventException(ES00000008);
+            throw new MikoLambEventException(ES00000008);
         } catch (NoSuchAlgorithmException e) {
-            throw new EventException(ES00000006);
+            throw new MikoLambEventException(ES00000006);
         } catch (InvalidKeyException e) {
-            throw new EventException(ES00000009);
+            throw new MikoLambEventException(ES00000009);
         } catch (NoSuchPaddingException e) {
-            throw new EventException(ES00000007);
+            throw new MikoLambEventException(ES00000007);
         } catch (BadPaddingException e) {
-            throw new EventException(ES00000010);
+            throw new MikoLambEventException(ES00000010);
         }  catch (IllegalBlockSizeException e) {
-            throw new EventException(ES00000011);
+            throw new MikoLambEventException(ES00000011);
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000012);
+            throw new MikoLambEventException(ES00000012);
         }
 
     }
@@ -180,7 +180,7 @@ public class RSACoderAlgorithm {
      * @return 加密后的字节数组
      * @throws Exception 异常
      */
-    public static byte[] encryptByPublicKey(byte[] data, String key,AlgorithmEnum encryptionType) {
+    public static byte[] encryptByPublicKey(byte[] data, String key, MikoLambAlgorithmEnum encryptionType) {
         try {
             byte[] encryptedData = null;
 
@@ -220,19 +220,19 @@ public class RSACoderAlgorithm {
             }
             return encryptedData;
         } catch (IOException e) {
-            throw new EventException(ES00000013);
+            throw new MikoLambEventException(ES00000013);
         } catch (NoSuchAlgorithmException e) {
-            throw new EventException(ES00000006);
+            throw new MikoLambEventException(ES00000006);
         } catch (InvalidKeyException e) {
-            throw new EventException(ES00000014);
+            throw new MikoLambEventException(ES00000014);
         } catch (NoSuchPaddingException e) {
-            throw new EventException(ES00000007);
+            throw new MikoLambEventException(ES00000007);
         } catch (BadPaddingException e) {
-            throw new EventException(ES00000015);
+            throw new MikoLambEventException(ES00000015);
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000016);
+            throw new MikoLambEventException(ES00000016);
         } catch (IllegalBlockSizeException e) {
-            throw new EventException(ES00000017);
+            throw new MikoLambEventException(ES00000017);
         }
 
     }
@@ -243,7 +243,7 @@ public class RSACoderAlgorithm {
      * @param privateKey 私钥
      * @return 签名后的base64值
      */
-    public static String sign(byte[] data, String privateKey,AlgorithmEnum signType) {
+    public static String sign(byte[] data, String privateKey, MikoLambAlgorithmEnum signType) {
 
         try {
             //解密私钥
@@ -262,13 +262,13 @@ public class RSACoderAlgorithm {
 
             return encryptBASE64(signature.sign());
         } catch (NoSuchAlgorithmException e) {
-            throw new EventException(ES00000006);
+            throw new MikoLambEventException(ES00000006);
         } catch (SignatureException e) {
-            throw new EventException(ES00000018);
+            throw new MikoLambEventException(ES00000018);
         } catch (InvalidKeyException e) {
-            throw new EventException(ES00000009);
+            throw new MikoLambEventException(ES00000009);
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000012);
+            throw new MikoLambEventException(ES00000012);
         }
 
     }
@@ -280,7 +280,7 @@ public class RSACoderAlgorithm {
      * @param sign   数字签名
      * @return 验签结果
      */
-    public static boolean verify(byte[] data, String publicKey, String sign,AlgorithmEnum signType) {
+    public static boolean verify(byte[] data, String publicKey, String sign, MikoLambAlgorithmEnum signType) {
 
 
         try {
@@ -299,13 +299,13 @@ public class RSACoderAlgorithm {
             //验证签名是否正常
             return signature.verify(decryptBASE64(sign));
         } catch (NoSuchAlgorithmException e) {
-            throw new EventException(ES00000006);
+            throw new MikoLambEventException(ES00000006);
         } catch (SignatureException e) {
-            throw new EventException(ES00000018);
+            throw new MikoLambEventException(ES00000018);
         } catch (InvalidKeyException e) {
-            throw new EventException(ES00000014);
+            throw new MikoLambEventException(ES00000014);
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000016);
+            throw new MikoLambEventException(ES00000016);
         }
     }
 
@@ -325,7 +325,7 @@ public class RSACoderAlgorithm {
             maxLength = keyLength / 8 - 11;
             return maxLength;
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000016);
+            throw new MikoLambEventException(ES00000016);
         }
 
     }
@@ -336,10 +336,10 @@ public class RSACoderAlgorithm {
      * @param encryptionType
      * @return
      */
-    private static int getMaxEncryptBlockSizeByEncryptionType(AlgorithmEnum encryptionType) {
-        if (encryptionType == AlgorithmEnum.RSA1024) {
+    private static int getMaxEncryptBlockSizeByEncryptionType(MikoLambAlgorithmEnum encryptionType) {
+        if (encryptionType == MikoLambAlgorithmEnum.RSA1024) {
             return 1024 / 8 - 11;
-        } else if (encryptionType == AlgorithmEnum.RSA2048) {
+        } else if (encryptionType == MikoLambAlgorithmEnum.RSA2048) {
             return 2048 / 8 - 11;
         }
 
@@ -362,7 +362,7 @@ public class RSACoderAlgorithm {
             maxLength = keyLength / 8;
             return maxLength;
         } catch (InvalidKeySpecException e) {
-            throw new EventException(ES00000016);
+            throw new MikoLambEventException(ES00000016);
         }
     }
 
@@ -372,10 +372,10 @@ public class RSACoderAlgorithm {
      * @param encryptionType
      * @return
      */
-    private static int getMaxDecryptBlockSizeByEncryptionType(AlgorithmEnum encryptionType) {
-        if (encryptionType == AlgorithmEnum.RSA1024) {
+    private static int getMaxDecryptBlockSizeByEncryptionType(MikoLambAlgorithmEnum encryptionType) {
+        if (encryptionType == MikoLambAlgorithmEnum.RSA1024) {
             return 1024 / 8;
-        } else if (encryptionType == AlgorithmEnum.RSA2048) {
+        } else if (encryptionType == MikoLambAlgorithmEnum.RSA2048) {
             return 2048 / 8;
         }
 

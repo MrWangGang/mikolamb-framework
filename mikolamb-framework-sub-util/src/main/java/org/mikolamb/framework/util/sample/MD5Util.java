@@ -1,10 +1,10 @@
 package org.mikolamb.framework.util.sample;
 
-import org.mikolamb.framework.common.exception.EventException;
+import org.mikolamb.framework.common.exception.MikoLambEventException;
 
 import java.security.MessageDigest;
 
-import static org.mikolamb.framework.common.enums.ExceptionEnum.ES00000035;
+import static org.mikolamb.framework.common.enums.MikoLambExceptionEnum.ES00000035;
 
 /**
  * @description: MD5加密
@@ -22,7 +22,7 @@ public class MD5Util {
             byte[] messageDigest = algorithm.digest();
             return messageDigest;
         } catch (Exception e) {
-            throw new EventException(ES00000035);
+            throw new MikoLambEventException(ES00000035);
         }
     }
 
@@ -46,7 +46,7 @@ public class MD5Util {
         try {
             return new String(toHex(md5(s)).getBytes("UTF-8"), "UTF-8");
         } catch (Exception e) {
-            throw new EventException(ES00000035);
+            throw new MikoLambEventException(ES00000035);
         }
     }
 }

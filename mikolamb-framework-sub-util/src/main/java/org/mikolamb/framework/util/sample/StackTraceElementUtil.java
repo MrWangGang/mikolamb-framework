@@ -1,6 +1,6 @@
 package org.mikolamb.framework.util.sample;
 
-import org.mikolamb.framework.common.exception.basic.GlobalException;
+import org.mikolamb.framework.common.exception.basic.MikoLambGlobalException;
 
 import java.util.Arrays;
 
@@ -11,6 +11,6 @@ import java.util.Arrays;
  **/
 public class StackTraceElementUtil {
     public static Boolean checkGlobalExcetionOStackTrace(StackTraceElement[] es){
-        return Arrays.stream(es).anyMatch(e -> GlobalException.class.getName().equals(e.getClassName()));
+        return Arrays.stream(es).anyMatch(e -> MikoLambGlobalException.class.getName().equals(e.getClassName()));
     }
 }

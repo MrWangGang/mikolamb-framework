@@ -1,12 +1,12 @@
 package org.mikolamb.framework.util.sample;
 
-import org.mikolamb.framework.common.exception.EventException;
+import org.mikolamb.framework.common.exception.MikoLambEventException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import static org.mikolamb.framework.common.enums.ExceptionEnum.ES00000005;
+import static org.mikolamb.framework.common.enums.MikoLambExceptionEnum.ES00000005;
 
 /**
  * Created by WangGang on 2017/7/6 0006.
@@ -19,7 +19,7 @@ public class URLEncoderUtil {
         try {
             return URLEncoder.encode(value,"UTF-8");
         } catch (UnsupportedEncodingException e) {
-            throw new EventException(ES00000005);
+            throw new MikoLambEventException(ES00000005);
         }
     }
 
