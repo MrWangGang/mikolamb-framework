@@ -1,4 +1,4 @@
-package org.mikolamb.framework.sub.statemachine.handler;
+package org.mikolamb.framework.sub.statemachine.selector;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +7,7 @@ import org.mikolamb.framework.common.exception.basic.GlobalException;
 import org.mikolamb.framework.sub.statemachine.annotation.LambStateMachineListener;
 import org.mikolamb.framework.sub.statemachine.annotation.LambStateMachineOnTransition;
 import org.mikolamb.framework.sub.statemachine.container.LambStateMachineContainer;
+import org.mikolamb.framework.sub.statemachine.machine.LambStateMachine;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 

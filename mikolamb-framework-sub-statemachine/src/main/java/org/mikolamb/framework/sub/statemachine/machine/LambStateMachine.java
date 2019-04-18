@@ -1,4 +1,4 @@
-package org.mikolamb.framework.sub.statemachine.handler;
+package org.mikolamb.framework.sub.statemachine.machine;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +7,7 @@ import org.mikolamb.framework.common.exception.basic.GlobalException;
 import org.mikolamb.framework.sub.statemachine.container.LambStateMachineContainer;
 import org.mikolamb.framework.sub.statemachine.container.LambStateMachineTransition;
 import org.mikolamb.framework.sub.statemachine.function.LambStateMachineCurrentStatus;
+import org.mikolamb.framework.sub.statemachine.executor.LambStateMachineExecute;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public class LambStateMachine implements LambStateMachineExecute {
 
     private Set<LambStateMachineContainer> containers;
 
-     LambStateMachine load(Set<LambStateMachineContainer> containers){
+    public LambStateMachine load(Set<LambStateMachineContainer> containers){
         if(this.containers!=null){
             if(this.containers.size()!=0){
                 this.containers.addAll(containers);

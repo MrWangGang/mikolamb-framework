@@ -1,7 +1,7 @@
 package org.mikolamb.framework.sub.statemachine.annotation;
 
 
-import org.mikolamb.framework.sub.statemachine.handler.LambStateMachineSelector;
+import org.mikolamb.framework.sub.statemachine.selector.LambStateMachineSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

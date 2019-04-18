@@ -1,4 +1,4 @@
-package org.mikolamb.framework.sub.statemachine.handler;
+package org.mikolamb.framework.sub.statemachine.executor;
 
 
 import org.mikolamb.framework.sub.statemachine.function.LambStateMachineCurrentStatus;

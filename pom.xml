@@ -197,9 +197,8 @@
 		<module>mikolamb-framework-web-swagger</module>
 		<module>mikolamb-framework-web-security</module>
 		<module>mikolamb-framework-sub-guid</module>
-		<module>mikolamb-framework-sub-queuepool</module>
 		<module>mikolamb-framework-sub-statemachine</module>
-		<module>mikolamb-framework-sub-taskexecutor</module>
+		<module>mikolamb-framework-sub-taskmachine</module>
 		<module>mikolamb-framework-sub-util</module>
 	</modules>
 

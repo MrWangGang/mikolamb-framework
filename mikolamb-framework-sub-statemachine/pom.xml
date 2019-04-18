@@ -5,7 +5,6 @@
 	<artifactId>mikolamb-framework-sub-statemachine</artifactId>
 	<name>mikolamb-framework-sub-statemachine</name>
 	<description>mikolamb-framework-sub-statemachine</description>
-	<url>https://github.com/MrWangGang</url>
 	<parent>
 		<groupId>org.mikolamb.framework</groupId>
 		<artifactId>mikolamb-framework</artifactId>
