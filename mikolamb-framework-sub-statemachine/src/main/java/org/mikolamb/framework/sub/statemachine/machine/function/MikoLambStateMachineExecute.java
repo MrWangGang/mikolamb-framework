@@ -1,7 +1,5 @@
-package org.mikolamb.framework.sub.statemachine.executor;
+package org.mikolamb.framework.sub.statemachine.machine.function;
 
-
-import org.mikolamb.framework.sub.statemachine.function.MikoLambStateMachineCurrentStatus;
 
 /**
  * @description: 暴露接口

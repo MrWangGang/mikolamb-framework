@@ -1,6 +1,7 @@
 package org.mikolamb.framework.sub.statemachine.container;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.mikolamb.framework.common.exception.basic.MikoLambGlobalException;
 
 import java.lang.reflect.Method;
@@ -32,13 +33,16 @@ public class MikoLambStateMachineContainer {
         if(this == obj) return true;
         if(obj instanceof MikoLambStateMachineContainer){
             MikoLambStateMachineContainer mikoLambStateMachineContainer =(MikoLambStateMachineContainer)obj;
-          if(mikoLambStateMachineContainer.event == mikoLambStateMachineContainer.event) return true; // 只比较event
+          if(event.equals(mikoLambStateMachineContainer.event)) return true; // 只比较event
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return event.hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((StringUtils.isBlank(event)) ? 0 : event.hashCode());
+        return result;
     }
 }

@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.mikolamb.framework.common.exception.MikoLambEventException;
 import org.mikolamb.framework.common.exception.basic.MikoLambGlobalException;
+import org.mikolamb.framework.sub.statemachine.annotation.MikoLambStateMachineExecutor;
 import org.mikolamb.framework.sub.statemachine.annotation.MikoLambStateMachineListener;
-import org.mikolamb.framework.sub.statemachine.annotation.MikoLambStateMachineOnTransition;
 import org.mikolamb.framework.sub.statemachine.container.MikoLambStateMachineContainer;
 import org.mikolamb.framework.sub.statemachine.machine.MikoLambStateMachine;
 import org.springframework.beans.BeansException;
@@ -32,15 +32,15 @@ public class MikoLambStateMachineSelector implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        Optional<MikoLambStateMachineListener> lambStateMachineListener = Optional.ofNullable(bean.getClass().getDeclaredAnnotation(MikoLambStateMachineListener.class));
-        if(lambStateMachineListener.isPresent()){
+        Optional<MikoLambStateMachineListener> mikoLambStateMachineListener = Optional.ofNullable(bean.getClass().getDeclaredAnnotation(MikoLambStateMachineListener.class));
+        if(mikoLambStateMachineListener.isPresent()){
             Method[] method = bean.getClass().getDeclaredMethods();
             Set<MikoLambStateMachineContainer> containers = Sets.newHashSet();
-            Arrays.stream(method).filter(e->Optional.ofNullable(e.getDeclaredAnnotation(MikoLambStateMachineOnTransition.class)).isPresent())
+            Arrays.stream(method).filter(e->Optional.ofNullable(e.getDeclaredAnnotation(MikoLambStateMachineExecutor.class)).isPresent())
                     .forEach((e)->{
-                        Optional<MikoLambStateMachineOnTransition> lambStateMachineTransition = Optional.ofNullable(e.getDeclaredAnnotation(MikoLambStateMachineOnTransition.class));
-                        if(lambStateMachineTransition.isPresent()){
-                            MikoLambStateMachineOnTransition annotation = lambStateMachineTransition.get();
+                        Optional<MikoLambStateMachineExecutor> mikoLambStateMachineExecutor = Optional.ofNullable(e.getDeclaredAnnotation(MikoLambStateMachineExecutor.class));
+                        if(mikoLambStateMachineExecutor.isPresent()){
+                            MikoLambStateMachineExecutor annotation = mikoLambStateMachineExecutor.get();
                             String initial = annotation.initial();
                             String source = annotation.source();
                             String target = annotation.target();
