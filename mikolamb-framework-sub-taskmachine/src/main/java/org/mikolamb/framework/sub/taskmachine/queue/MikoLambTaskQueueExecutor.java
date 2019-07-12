@@ -5,6 +5,7 @@ import lombok.Data;
 import org.mikolamb.framework.common.exception.MikoLambEventException;
 import org.mikolamb.framework.sub.taskmachine.queue.function.MikoLambTaskQueueBlockOperation;
 import org.mikolamb.framework.sub.taskmachine.queue.function.MikoLambTaskQueueUnBlockOperation;
+import org.mikolamb.framework.sub.taskmachine.queue.support.MikoLambTaskQueueSupportOperation;
 
 import java.util.Optional;
 

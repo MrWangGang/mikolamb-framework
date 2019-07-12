@@ -1,4 +1,4 @@
-package org.mikolamb.framework.sub.taskmachine.queue;
+package org.mikolamb.framework.sub.taskmachine.queue.support;
 
 import lombok.Data;
 import org.mikolamb.framework.common.exception.MikoLambEventException;
