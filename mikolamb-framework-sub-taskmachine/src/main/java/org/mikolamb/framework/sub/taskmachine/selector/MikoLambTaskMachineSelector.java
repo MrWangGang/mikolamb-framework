@@ -49,7 +49,16 @@ public class MikoLambTaskMachineSelector implements BeanPostProcessor {
                     if(maxExecuteThreadNum<=0 && maxExecuteThreadNum%2!=0)throw new MikoLambEventException(ES00000054);
                     if(maxExecuteQueueSize<=0)throw new MikoLambEventException(ES00000055);
                     if(maxTaskExecuteTime<=1000)throw new MikoLambEventException(ES00000056);
-                    MikoLambTaskQueueExecutor mikoLambTaskQueueExecutor =  MikoLambTaskQueueExecutor.builder().build();
+                    if(annotation.consumerType()==null)throw new MikoLambEventException(ES00000062);
+                    MikoLambTaskQueueExecutor mikoLambTaskQueueExecutor =  MikoLambTaskQueueExecutor.builder()
+                            .taskKey(taskKey)
+                            .consumer(e)
+                            .fair(annotation.fair())
+                            .maxExecuteQueueSize(annotation.maxExecuteQueueSize())
+                            .maxExecuteThreadNum(annotation.maxExecuteThreadNum())
+                            .maxTaskExecuteTime(annotation.maxTaskExecuteTime())
+                            .build();
+                    mikoLambTaskQueueExecutor.load();
                     MikoLambTaskMachineContainer container =  MikoLambTaskMachineContainer.builder().build();
                     container.setTaskKey(taskKey);
                     container.setMaxExecuteQueueSize(maxExecuteQueueSize);

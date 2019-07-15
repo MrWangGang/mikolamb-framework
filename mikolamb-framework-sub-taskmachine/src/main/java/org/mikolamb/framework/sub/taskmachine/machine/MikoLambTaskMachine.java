@@ -4,7 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.mikolamb.framework.common.exception.MikoLambEventException;
 import org.mikolamb.framework.sub.taskmachine.container.MikoLambTaskMachineContainer;
 import org.mikolamb.framework.sub.taskmachine.machine.function.MikoLambTaskMachineExecute;
+import org.mikolamb.framework.sub.taskmachine.queue.MikoLambTaskQueueExecutor;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.events.EventException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -42,18 +44,22 @@ public class MikoLambTaskMachine<Model> implements MikoLambTaskMachineExecute<Mo
         return modelMikoLambTaskMachineContainer;
     }
 
+
+    private <Model>MikoLambTaskQueueExecutor<Model> getExecutor(Model model, String taskKey){
+        MikoLambTaskMachineContainer<Model> mikoLambTaskMachineContainer = matchContainer(model,taskKey);
+        MikoLambTaskQueueExecutor<Model> executor = mikoLambTaskMachineContainer.getMikoLambTaskQueueExecutor();
+        Optional.ofNullable(executor).orElseThrow(()->new MikoLambEventException(ES00000060));
+        return executor;
+    }
+
     @Override
     public <Model> void blockPush(Model model, String taskKey) {
-        MikoLambTaskMachineContainer<Model> mikoLambTaskMachineContainer = matchContainer(model,taskKey);
-        mikoLambTaskMachineContainer.getMikoLambTaskQueueExecutor();
-
+        getExecutor(model,taskKey).block().push(model);
     }
 
 
     @Override
     public <Model> void unBlockPush(Model model, String taskKey) {
-        MikoLambTaskMachineContainer<Model> mikoLambTaskMachineContainer = matchContainer(model,taskKey);
-
-
+        getExecutor(model,taskKey).unblock().push(model);
     }
 }

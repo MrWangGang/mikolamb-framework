@@ -1,5 +1,7 @@
 package org.mikolamb.framework.sub.taskmachine.annotation;
 
+import org.mikolamb.framework.sub.taskmachine.enums.ConsumerTypeEnum;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,4 +27,8 @@ public @interface MikoLambTaskMachineExecutor {
 
     /*每个任务最大耗时时间*/
     int maxTaskExecuteTime();
+
+    boolean fair();
+
+    ConsumerTypeEnum consumerType();
 }
